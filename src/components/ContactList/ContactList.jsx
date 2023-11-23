@@ -33,9 +33,9 @@ export const ContactList = () => {
         })}
       {visibleContacts.length > 0 && (
         <ul>
-          {visibleContacts.map(({ id, name, phone }) => (
+          {visibleContacts.map(({ id, name, number }) => (
             <ListItem key={id}>
-              {name}: {phone}
+              {name}: {number}
               <DeleteBtn
                 type="button"
                 onClick={() => dispatch(deleteContact(id))}

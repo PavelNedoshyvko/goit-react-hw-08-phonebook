@@ -12,7 +12,7 @@ import {
 } from './ContactForm.styled';
 import { selectContacts } from 'redux/selectors';
 
-const phoneRegExp = /^(\+?\d+)?\s*(\(\d+\))?[\s-]*([\d-]*)$/;
+const numberRegExp = /^(\+?\d+)?\s*(\(\d+\))?[\s-]*([\d-]*)$/;
 const nameRegExp = /^(([a-zA-Z' -]{1,80})|([а-яА-ЯЁёІіЇїҐґЄє' -]{1,80}))$/u;
 
 const ContactSchema = Yup.object().shape({
@@ -23,9 +23,9 @@ const ContactSchema = Yup.object().shape({
     )
     .min(2, 'Too Short!')
     .required('Required!'),
-  phone: Yup.string()
+  number: Yup.string()
     .matches(
-      phoneRegExp,
+      numberRegExp,
       'Phone number must be digits and can contain dashes, parentheses and can start with +'
     )
     .min(16, 'Too short!')
@@ -42,7 +42,7 @@ export const ContactForm = () => {
       <Formik
         initialValues={{
           name: '',
-          phone: '',
+          number: '',
         }}
         validationSchema={ContactSchema}
         onSubmit={(values, actions) => {
@@ -62,14 +62,14 @@ export const ContactForm = () => {
           <FieldInput id="name" name="name" placeholder="" />
           <ErrMessage name="name" component="div" />
 
-          <FormLabel htmlFor="phone">Number</FormLabel>
+          <FormLabel htmlFor="number">Number</FormLabel>
           <FieldInput
-            id="phone"
-            name="phone"
+            id="number"
+            name="number"
             placeholder="+XX(XXX)-XXX-XX-XX"
-            type="phone"
+            type="tel"
           />
-          <ErrMessage name="phone" component="div" />
+          <ErrMessage name="number" component="div" />
 
           <AddContactBtn type="submit">Add contact</AddContactBtn>
         </FormContacts>
